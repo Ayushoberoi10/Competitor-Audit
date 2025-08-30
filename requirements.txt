@@ -1,0 +1,4 @@
+# Flask web app and scraping deps
+Flask==3.0.2
+requests==2.32.3
+beautifulsoup4==4.12.3

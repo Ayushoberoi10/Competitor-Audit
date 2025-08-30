@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Competitor Audit</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Competitor Audit Tool</h2>
+    <form method="POST">
+      <div id="pairs">
+        <div class="pair">
+          <input type="text" name="client[]" placeholder="Enter Client Site" required>
+          <input type="text" name="competitor[]" placeholder="Enter Competitor Site" required>
+        </div>
+      </div>
+      <button type="button" onclick="addPair()">➕ Add More Pairs</button>
+      <button type="submit">Check</button>
+    </form>
+
+    {% if results %}
+    <h3>Results</h3>
+    <table>
+      <tr>
+        <th>Client Site</th>
+        <th>Competitor Site</th>
+        <th>Status</th>
+      </tr>
+      {% for r in results %}
+      <tr>
+        <td>{{ r.client }}</td>
+        <td>{{ r.competitor }}</td>
+        <td>{{ r.status }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </div>
+
+  <script>
+    function addPair() {
+      const div = document.createElement("div");
+      div.className = "pair";
+      div.innerHTML = `
+        <input type="text" name="client[]" placeholder="Enter Client Site" required>
+        <input type="text" name="competitor[]" placeholder="Enter Competitor Site" required>
+      `;
+      document.getElementById("pairs").appendChild(div);
+    }
+  </script>
+</body>
+</html>
